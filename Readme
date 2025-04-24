@@ -1,0 +1,52 @@
+1.Milestone 1 Objective
+The objective of Milestone 1 is to build an internal Precheck Database that centralizes and reuses investigation results from precheck cases that did not lead to the creation of a Problem Report (PR).
+
+The system should support multiple input sources (e.g., emails) and provide both a visual web interface and a structured data format.
+
+A key feature of this milestone is the use of AI to automatically parse key information from unstructured sources (such as emails), and store it into the structured database.
+
+
+2.ai_extract.py – Email Extraction Module
+
+Overview
+ai_extract.py is a script for extracting technical test information from .eml email files.
+
+Features
+Parses .eml files and extracts text content
+
+Cleans and chunks email body for analysis
+
+Uses SentenceTransformer + ChromaDB for semantic similarity search
+
+Applies rule-based extraction (regex) when possible
+
+Falls back to AI extraction using OpenRouter LLM if needed
+
+Outputs structured sections:
+
+[1. Detail Test Steps:]
+
+[2. Expected Result:]
+
+[3. Actual Result:]
+
+How to Use
+run "python3 ai_extract.py"
+Make sure your .eml file is named example_eml.eml (or adjust the filename in the script).
+
+Requirements
+Python 3.7+
+
+sentence-transformers
+
+chromadb
+
+requests
+
+.eml file to analyze
+
+OpenRouter API key
+
+Output
+Extracted and printed structured test descriptions that can be inserted into a precheck database.
+
