@@ -1,0 +1,480 @@
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): huggingface.co:443
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6812
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6812
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 742-159-908
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): us.i.posthog.com:443
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Parsed body from uploads/example_eml.eml:
+Thanks Magdalena.
+
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com>; @Nicolae Tarfulea (Nokia)<mailto:nicolae.tarfulea@nokia.com>; can you please check out the below issue?
+Thanks
+Honore
+
+From: Magdalena Jalowko-Bak (Nokia) <magdalena.jalowko-bak@nokia.com>
+Sent: Tuesday, April 22, 2025 8:25 AM
+To: Anna Gancarz (Nokia) <anna.gancarz@nokia.com>; Honore Ho (Nokia) <honore.ho@nokia.com>; Natalia Grun (Nokia) <natalia.grun@nokia.com>; Nicolae Tarfulea (Nokia) <nicolae.tarfulea@nokia.com>
+Cc: Tar...
+DEBUG:root:Cleaned body:
+Thanks Magdalena.
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.comThanks
+Honore
+Hi,
+You can contact the NIDD coordinators: @Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com
+BR,
+Magda
+Hi,
+Sorry for the delayed response. If the 5000 desc is missing from the CFAM as well, then I agree that this should probably be forwarded to the specification team.
+I'm also adding Magdalena, the BTS CuDo APO, to the thread. @Magdalena<mailto:magdalena.jalowko-bak@nokia.com
+Thanks,
+BR
+Anna
+Hi Anna;
+Any updates...
+INFO:root:🤖 Using OpenRouter LLM extraction...
+DEBUG:root:Created 1 chunks
+DEBUG:root:Filtered to 1 chunks
+DEBUG:root:Stored 1 chunks for example_eml.eml
+DEBUG:root:Queried 0 relevant chunks for query: Content related to Detail Test Steps
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Queried 0 relevant chunks for query: Content related to Expected Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:Queried 0 relevant chunks for query: Content related to Actual Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:LLM extracted:
+[Detail Test Steps:]
+Not found.
+
+[Expected Result:]
+Expected Result: The reason code 500 is missing in the description, but it seems that the issue should be forwarded to the 5G_SPEC_CP team for further investigation.
+
+[Actual Result:]
+Actual Result: Reason 500 is missing in the description and appears to be missing from CFAM PoV. The issue may need to be forwarded to 5G_SPEC_CP for further investigation.
+INFO:werkzeug:127.0.0.1 - - [13/May/2025 02:51:56] "POST /api/extract HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/yifanwang/Desktop/precheck_example/ai_extract.py', reloading
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): huggingface.co:443
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6812
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6812
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 742-159-908
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): us.i.posthog.com:443
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Parsed body from uploads/example_eml.eml:
+Thanks Magdalena.
+
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com>; @Nicolae Tarfulea (Nokia)<mailto:nicolae.tarfulea@nokia.com>; can you please check out the below issue?
+Thanks
+Honore
+
+From: Magdalena Jalowko-Bak (Nokia) <magdalena.jalowko-bak@nokia.com>
+Sent: Tuesday, April 22, 2025 8:25 AM
+To: Anna Gancarz (Nokia) <anna.gancarz@nokia.com>; Honore Ho (Nokia) <honore.ho@nokia.com>; Natalia Grun (Nokia) <natalia.grun@nokia.com>; Nicolae Tarfulea (Nokia) <nicolae.tarfulea@nokia.com>
+Cc: Tar...
+DEBUG:root:Cleaned body:
+Thanks Magdalena.
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.comThanks
+Honore
+Hi,
+You can contact the NIDD coordinators: @Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com
+BR,
+Magda
+Hi,
+Sorry for the delayed response. If the 5000 desc is missing from the CFAM as well, then I agree that this should probably be forwarded to the specification team.
+I'm also adding Magdalena, the BTS CuDo APO, to the thread. @Magdalena<mailto:magdalena.jalowko-bak@nokia.com
+Thanks,
+BR
+Anna
+Hi Anna;
+Any updates...
+INFO:root:🤖 Using OpenRouter LLM extraction...
+DEBUG:root:Created 1 chunks
+DEBUG:root:Filtered to 1 chunks
+DEBUG:root:Stored 1 chunks for example_eml.eml
+DEBUG:root:Queried 0 relevant chunks for query: Content related to Detail Test Steps
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Queried 0 relevant chunks for query: Content related to Expected Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:Queried 0 relevant chunks for query: Content related to Actual Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:LLM extracted:
+[Detail Test Steps:]
+The test steps involve identifying missing Reason 5000 from both NIDD comments and the CFAM PoV. The issue should be forwarded to the 5G_SPEC_CP team if found applicable. Additionally, the inquiry needs further clarification on which CuDo group it belongs to: MantaRay HW Manager or NEAT Customer Documentation.
+
+[Expected Result:]
+The expected result is to forward the issue regarding missing reason code 500 in the NIDD comments and CFAM to the specification team (5G_SPEC_CP).
+
+[Actual Result:]
+The actual result from the email content is: "Reason 500 is missing in the description, but seems that it is also missing from CFAM PoV." This indicates a missing element, which might need to be forwarded to the specification team.
+INFO:werkzeug:127.0.0.1 - - [13/May/2025 02:52:29] "POST /api/extract HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/yifanwang/Desktop/precheck_example/ai_extract.py', reloading
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): huggingface.co:443
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6812
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6812
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): us.i.posthog.com:443
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): huggingface.co:443
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6812
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6812
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 742-159-908
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): us.i.posthog.com:443
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Parsed body from uploads/example_eml.eml:
+Thanks Magdalena.
+
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com>; @Nicolae Tarfulea (Nokia)<mailto:nicolae.tarfulea@nokia.com>; can you please check out the below issue?
+Thanks
+Honore
+
+From: Magdalena Jalowko-Bak (Nokia) <magdalena.jalowko-bak@nokia.com>
+Sent: Tuesday, April 22, 2025 8:25 AM
+To: Anna Gancarz (Nokia) <anna.gancarz@nokia.com>; Honore Ho (Nokia) <honore.ho@nokia.com>; Natalia Grun (Nokia) <natalia.grun@nokia.com>; Nicolae Tarfulea (Nokia) <nicolae.tarfulea@nokia.com>
+Cc: Tar...
+DEBUG:root:Cleaned body:
+Thanks Magdalena.
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.comThanks
+Honore
+Hi,
+You can contact the NIDD coordinators: @Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com
+BR,
+Magda
+Hi,
+Sorry for the delayed response. If the 5000 desc is missing from the CFAM as well, then I agree that this should probably be forwarded to the specification team.
+I'm also adding Magdalena, the BTS CuDo APO, to the thread. @Magdalena<mailto:magdalena.jalowko-bak@nokia.com
+Thanks,
+BR
+Anna
+Hi Anna;
+Any updates...
+INFO:root:🤖 Using OpenRouter LLM extraction...
+DEBUG:root:Created 2 chunks
+DEBUG:root:Filtered to 2 chunks from 2
+DEBUG:root:Stored 2 chunks for example_eml.eml
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Detail Test Steps
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Expected Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Actual Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:LLM extracted:
+[Detail Test Steps]:
+Not found
+
+[Expected Result]:
+Not found
+
+[Actual Result]:
+Not found
+INFO:werkzeug:127.0.0.1 - - [13/May/2025 02:57:41] "POST /api/extract HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/yifanwang/Desktop/precheck_example/ai_extract.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: mps
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): huggingface.co:443
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/revision/main HTTP/1.1" 200 6812
+DEBUG:urllib3.connectionpool:https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6812
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+INFO:chromadb.telemetry.product.posthog:Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+DEBUG:chromadb.config:Starting component System
+DEBUG:chromadb.config:Starting component Posthog
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 742-159-908
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): us.i.posthog.com:443
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Parsed body from uploads/example_eml.eml:
+Thanks Magdalena.
+
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com>; @Nicolae Tarfulea (Nokia)<mailto:nicolae.tarfulea@nokia.com>; can you please check out the below issue?
+Thanks
+Honore
+
+From: Magdalena Jalowko-Bak (Nokia) <magdalena.jalowko-bak@nokia.com>
+Sent: Tuesday, April 22, 2025 8:25 AM
+To: Anna Gancarz (Nokia) <anna.gancarz@nokia.com>; Honore Ho (Nokia) <honore.ho@nokia.com>; Natalia Grun (Nokia) <natalia.grun@nokia.com>; Nicolae Tarfulea (Nokia) <nicolae.tarfulea@nokia.com>
+Cc: Tar...
+DEBUG:root:Cleaned body:
+Thanks Magdalena.
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia.comThanks
+Honore
+Hi,
+You can contact the NIDD coordinators: @Natalia Grun (Nokia)<mailto:natalia.grun@nokia.com
+BR,
+Magda
+Hi,
+Sorry for the delayed response. If the 5000 desc is missing from the CFAM as well, then I agree that this should probably be forwarded to the specification team.
+I'm also adding Magdalena, the BTS CuDo APO, to the thread. @Magdalena<mailto:magdalena.jalowko-bak@nokia.com
+Thanks,
+BR
+Anna
+Hi Anna;
+Any updates...
+INFO:root:🤖 Using OpenRouter LLM extraction...
+DEBUG:root:Created 2 chunks
+DEBUG:root:Filtered to 2 chunks from 2
+DEBUG:root:Stored 2 chunks for example_eml.eml
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Detail Test Steps
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://us.i.posthog.com:443 "POST /batch/ HTTP/1.1" 200 15
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Expected Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Actual Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:LLM extracted:
+[Detail Test Steps]:
+Extracted Detail Test Steps:
+1. Check the DSS configuration.
+2. Parameters on both CRM client sides need to match.
+3. If they don't match, change the configuration parameters depending on the reason from the supplementary alarm information:
+   3.1 Reason 5000) Internal error: No explanation can be found related to this internal error. Secondary information sources:
+      - BTS Fault Details - NIDD
+
+[Expected Result]:
+Expected Result:
+It is related to the fact that the NIDD comments are not complete.
+Reason 5000 is missing in the description, but seems that it is also missing from CFAM PoV.
+Maybe this precheck has to be forwarded to 5G_SPEC_CP?
+
+[Actual Result]:
+Actual Result:
+Reason 5000) Internal error. is missing in the description, but seems that it is also missing from CFAM PoV.
+Additional information:
+BTS Fault Details - NIDD
+INFO:werkzeug:127.0.0.1 - - [13/May/2025 02:58:13] "POST /api/extract HTTP/1.1" 200 -
+DEBUG:root:Parsed body from uploads/Closed_BOAM_Pre-check-2025-04-02CB008144Fid_4546Sleeping_Cell_Detection_Due_To_Abnormal_Antenna_RX_Power_Measurements_assertion.eml:
+Many thanks to Blazej direct explanations;
+We can close this precheck.
+Honore
+
+From: Blazej Arent (Nokia) <blazej.arent@nokia.com>
+Sent: Wednesday, April 9, 2025 9:16 AM
+To: Honore Ho (Nokia) <honore.ho@nokia.com>; I_MN_BOAM_5G_APP_ADAPT_GMS <I_MN_BOAM_5G_APP_ADAPT@internal.nsn.com>; Krystian Pawlak (Nokia) <krystian.pawlak@nokia.com>
+Cc: Tarek Saket (Nokia) <tarek.saket@nokia.com>; Yifan Wang (Nokia) <yifan.wang@nokia.com>; Christian Konki (Nokia) <christian.konki@nokia.com>
+Subject: RE: [BOAM ...
+DEBUG:root:Cleaned body:
+Many thanks to Blazej direct explanations;
+We can close this precheck.
+Honore
+Hello,
+I will take care of this.
+Regards,
+Baej Arent
+Adding Christian and Krystian.
+Also, was this precheck allocated for analysis, please?
+Thanks
+Honore
+Hi there,
+Could you please precheck this issue;
+It is related to Sleeping Cell Detection Due To Abnormal Antenna RX Power Measurements testing.
+Actual setting is the golden one with nrRxPwrSlCellDetHChFrq = 900s = 15min.
+1.  Call initiated at :13:56
+[cid:image001.png@...
+INFO:root:🤖 Using OpenRouter LLM extraction...
+DEBUG:root:Created 1 chunks
+DEBUG:root:Filtered to 1 chunks from 1
+DEBUG:root:Stored 1 chunks for Closed_BOAM_Pre-check-2025-04-02CB008144Fid_4546Sleeping_Cell_Detection_Due_To_Abnormal_Antenna_RX_Power_Measurements_assertion.eml
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Detail Test Steps
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Expected Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:Queried 0 relevant chunks for query: Technical content for Actual Result
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): openrouter.ai:443
+DEBUG:urllib3.connectionpool:https://openrouter.ai:443 "POST /api/v1/chat/completions HTTP/1.1" 200 None
+DEBUG:root:LLM extracted:
+[Detail Test Steps]:
+Test Steps:
+1. Call initiated at 13:56.
+Actual configuration: nrRxPwrSlCellDetHChFrq = 900s = 15min.
+2. The expectation was to see the alarm raised between 0 and 15 minutes of difference in power measurements among antennas. However, the alarm asserted only after 55 minutes of difference in power measurements among antennas.
+Relevant content from the email:
+- "\\eseefsn50.emea.nsn-net.net\rotta4internal\5G_3\paris-saclay\CustomerConfigs\TL336_ATT\PR_Investigation\Rx_sleepingCell_DSS\Precheck-alarm-assertion-time\Snapshot_MRBTS-720336_ATT_5G_TDD_FDD_SA_NSA_AHFII_AEQK_AEQU_CV336_SBTS25R3_ENB_9990_250324_000004_20250402-1505.zip" is the location where the captured traces can be found.
+
+[Expected Result]:
+Expected Result: 
+
+- The alarm is asserted only after 55 min of difference of power among antennas, while the expectation was to see the alarm raised between 0 and 15min. 
+- Traces are available in the file: \\\eseefsn50.emea.nsn-net.net\rotta4internal\5G_3\paris-saclay\CustomerConfigs\TL336_ATT\PR_Investigation\Rx_sleepingCell_DSS\Precheck-alarm-assertion-time\Snapshot_MRBTS-720336_ATT_5G_TDD_FDD_SA_NSA_AHFII_AEQK_AEQU_CV336_SBTS25R3_ENB_9990_250324_000004_20250402-1505.zip
+
+[Actual Result]:
+Not found
+INFO:werkzeug:127.0.0.1 - - [13/May/2025 02:59:47] "POST /api/extract HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/yifanwang/Desktop/precheck_example/ai_extract.py', reloading
+INFO:werkzeug: * Restarting with stat
+{"time": "2025-05-13 03:11:59,476", "level": "DEBUG", "message": Parsed EML Uploads/173936ec-a751-4864-906c-ba5b2d6054ae_Precheck-15-04-2025__Fid_6135CRM4G__Supplementary_alarm_information__Reason_5000_Internal_error._1.eml: Hi,
+
+I'm adding @Sergiu Susman (Nokia)<mailto:sergiu.susman@nokia.com> to check this issue with the Reason 5000.
+
+Best Regards,
+Nicolae
+From: Honore Ho (Nokia) <honore.ho@nokia.com>
+Sent: Tuesday, Apr...}
+{"time": "2025-05-13 03:11:59,478", "level": "DEBUG", "message": Cleaned body: Hi,
+I'm adding @Sergiu Susman (Nokia)<mailto:sergiu.susman@nokia.com> to check this issue with the Reason 5000.
+Best Regards,
+Nicolae
+Thanks Magdalena.
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia....}
+{"time": "2025-05-13 03:11:59,478", "level": "INFO", "message": 🤖 Falling back to LLM extraction for Uploads/173936ec-a751-4864-906c-ba5b2d6054ae_Precheck-15-04-2025__Fid_6135CRM4G__Supplementary_alarm_information__Reason_5000_Internal_error._1.eml}
+{"time": "2025-05-13 03:16:06,712", "level": "DEBUG", "message": Parsed EML Uploads/be0ece69-3345-405c-818f-6a6a79b68076_Precheck-15-04-2025__Fid_6135CRM4G__Supplementary_alarm_information__Reason_5000_Internal_error._1.eml: Hi,
+
+I'm adding @Sergiu Susman (Nokia)<mailto:sergiu.susman@nokia.com> to check this issue with the Reason 5000.
+
+Best Regards,
+Nicolae
+From: Honore Ho (Nokia) <honore.ho@nokia.com>
+Sent: Tuesday, Apr...}
+{"time": "2025-05-13 03:16:06,714", "level": "DEBUG", "message": Cleaned body: Hi,
+I'm adding @Sergiu Susman (Nokia)<mailto:sergiu.susman@nokia.com> to check this issue with the Reason 5000.
+Best Regards,
+Nicolae
+Thanks Magdalena.
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia....}
+{"time": "2025-05-13 03:16:06,714", "level": "INFO", "message": 🤖 Falling back to LLM extraction for Uploads/be0ece69-3345-405c-818f-6a6a79b68076_Precheck-15-04-2025__Fid_6135CRM4G__Supplementary_alarm_information__Reason_5000_Internal_error._1.eml}
+{"time": "2025-05-13 03:16:06,734", "level": "DEBUG", "message": Created 3 chunks}
+{"time": "2025-05-13 03:16:08,078", "level": "DEBUG", "message": Filtered to 0 chunks from 3}
+{"time": "2025-05-13 03:16:08,080", "level": "DEBUG", "message": Stored 0 chunks for 8833bd90-6b07-47a2-85e2-664242227531}
+{"time": "2025-05-13 03:16:08,329", "level": "DEBUG", "message": Queried 0 relevant chunks for query: Technical content for Detail Test Steps}
+{"time": "2025-05-13 03:16:09,717", "level": "DEBUG", "message": Queried 0 relevant chunks for query: Technical content for Expected Result}
+{"time": "2025-05-13 03:16:10,379", "level": "DEBUG", "message": Queried 0 relevant chunks for query: Technical content for Actual Result}
+{"time": "2025-05-13 03:16:11,142", "level": "DEBUG", "message": LLM extracted:
+[Detail Test Steps]:
+Not found
+
+[Expected Result]:
+Not found
+
+[Actual Result]:
+Not found...}
+{"time": "2025-05-13 03:16:38,362", "level": "DEBUG", "message": Parsed EML Uploads/8be534b0-0ed3-43e9-9b3e-fb659cc8792e_Precheck-15-04-2025__Fid_6135CRM4G__Supplementary_alarm_information__Reason_5000_Internal_error._1.eml: Hi,
+
+I'm adding @Sergiu Susman (Nokia)<mailto:sergiu.susman@nokia.com> to check this issue with the Reason 5000.
+
+Best Regards,
+Nicolae
+From: Honore Ho (Nokia) <honore.ho@nokia.com>
+Sent: Tuesday, Apr...}
+{"time": "2025-05-13 03:16:38,365", "level": "DEBUG", "message": Cleaned body: Hi,
+I'm adding @Sergiu Susman (Nokia)<mailto:sergiu.susman@nokia.com> to check this issue with the Reason 5000.
+Best Regards,
+Nicolae
+Thanks Magdalena.
+@Natalia Grun (Nokia)<mailto:natalia.grun@nokia....}
+{"time": "2025-05-13 03:16:38,365", "level": "INFO", "message": 🤖 Falling back to LLM extraction for Uploads/8be534b0-0ed3-43e9-9b3e-fb659cc8792e_Precheck-15-04-2025__Fid_6135CRM4G__Supplementary_alarm_information__Reason_5000_Internal_error._1.eml}
+{"time": "2025-05-13 03:16:38,387", "level": "DEBUG", "message": Created 3 chunks}
+{"time": "2025-05-13 03:16:38,843", "level": "DEBUG", "message": Filtered to 0 chunks from 3}
+{"time": "2025-05-13 03:16:38,844", "level": "DEBUG", "message": Stored 0 chunks for aa3bc48e-29aa-4310-af23-94acfa71ddad}
+{"time": "2025-05-13 03:16:39,011", "level": "DEBUG", "message": Queried 0 relevant chunks for query: Technical content for Detail Test Steps}
+{"time": "2025-05-13 03:16:40,437", "level": "DEBUG", "message": Queried 0 relevant chunks for query: Technical content for Expected Result}
+{"time": "2025-05-13 03:16:41,701", "level": "DEBUG", "message": Queried 0 relevant chunks for query: Technical content for Actual Result}
+{"time": "2025-05-13 03:16:42,640", "level": "DEBUG", "message": LLM extracted:
+[Detail Test Steps]:
+- Extract verbatim technical details (e.g., configurations, test actions, outcomes).
+- Include all relevant content, such as settings, observations, or errors.
+- Exclude signatures, footers, quoted replies, or unrelated content.
+- Return only the extracted section content
+
+========= EXTRACTED CONTENT =========
+
+BTS Fault Details - NIDD
+
+[Expected Result]:
+The Expected Result section is not explicitly labeled or defined in the provided email content. However, based on the con...}
