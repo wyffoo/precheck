@@ -3,11 +3,17 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import sqlite3, os
+import nltk
 
 from ai_extract import parse_eml, extract_description, extract_resolution, extract_image_text
 
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 UPLOAD_FOLDER = "uploads"
 DB_PATH = "precheck_records.db"
