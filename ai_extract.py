@@ -9,7 +9,7 @@ from sentence_transformers import SentenceTransformer
 import chromadb
 from nltk.tokenize import sent_tokenize
 from PIL import Image
-import pytesseract
+import easyocr
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -47,9 +47,15 @@ SUPPORTED_EXTENSIONS = {
 
 def extract_image_text(img_path):
     try:
-        img = Image.open(img_path)
-        text = pytesseract.image_to_string(img, lang='eng')
-        return text.strip()
+        reader = easyocr.Reader(['en'])  # 初始化 EasyOCR 读取器，支持英语
+        result = reader.readtext(img_path)
+
+        # 通过 EasyOCR 提取文本
+        text = ""
+        for detection in result:
+            text += detection[1] + "\n"  # 获取检测到的文本
+
+        return text.strip()  # 返回提取的文本
     except Exception as e:
         logger.error(f"Failed to extract text from image {img_path}: {e}")
         return ""

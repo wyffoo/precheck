@@ -7,5 +7,5 @@ beautifulsoup4
 sentence-transformers
 chromadb
 pillow
-pytesseract
 gunicorn
+easyocr
