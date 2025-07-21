@@ -1,23 +1,23 @@
-# Use an official Python runtime as a parent image
+# 使用官方 Python 运行时作为父镜像
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# 设置工作目录
 WORKDIR /app
 
-# Copy the current directory contents into the container
+# 复制当前目录的内容到容器中
 COPY . /app
 
-# Install dependencies
+# 安装依赖项
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install gunicorn
+# 安装 gunicorn
 RUN pip install gunicorn
 
-# Make port 8080 available to the world outside this container
+# 让端口 8080 可用于容器外部
 EXPOSE 8080
 
-# Define environment variable
+# 定义环境变量
 ENV PYTHONUNBUFFERED 1
 
-# Run the app using gunicorn
+# 运行应用程序，使用 gunicorn
 CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
