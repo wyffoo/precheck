@@ -16,8 +16,9 @@ RUN pip install gunicorn
 # 让端口 8080 可用于容器外部
 EXPOSE 8080
 
-# 定义环境变量
+# 定义环境变量 (如果没有明确给定 PORT，默认绑定到 8080)
+ENV PORT 8080
 ENV PYTHONUNBUFFERED 1
 
 # 运行应用程序，使用 gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:${PORT}", "app:app"]
