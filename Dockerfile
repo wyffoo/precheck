@@ -20,9 +20,13 @@ EXPOSE 8080
 ENV PORT=8080
 ENV PYTHONUNBUFFERED=1
 
-# 复制 entrypoint 脚本
+# 复制 entrypoint 脚本并确保可执行
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# 验证 entrypoint.sh 存在并可执行
+RUN ls -l /entrypoint.sh
+
 # 使用 entrypoint 脚本启动应用
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD []
