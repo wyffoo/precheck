@@ -4,7 +4,6 @@ nixPkgs = ["python310", "python310Packages.pip", "python310Packages.setuptools"]
 
 [phases.install]
 cmds = [
-    "python -m ensurepip --upgrade",
     "python -m pip install --no-cache-dir -r requirements.txt",
     "python -m nltk.downloader punkt"
 ]
