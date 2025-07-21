@@ -1,6 +1,6 @@
 [phases.setup]
-aptPkgs = ["tesseract-ocr", "libtesseract-dev", "gcc", "g++", "make"]
-nixPkgs = ["python39", "python39Packages.pip", "python39Packages.setuptools"]
+aptPkgs = ["tesseract-ocr", "libtesseract-dev", "gcc", "g++", "make", "libffi-dev", "libssl-dev", "zlib1g-dev"]
+nixPkgs = ["python310", "python310Packages.pip", "python310Packages.setuptools"]
 
 [phases.install]
 cmds = [
