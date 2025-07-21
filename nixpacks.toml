@@ -4,15 +4,15 @@ nixPkgs = ["python310", "python310Packages.pip", "python310Packages.setuptools"]
 
 [phases.install]
 cmds = [
-    # Install pip manually as a fallback
-    "curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py",
-    "python get-pip.py --no-cache-dir",
-    "python -m pip install --no-cache-dir -r requirements.txt",
-    "python -m nltk.downloader punkt"
+    # Create a virtual environment to avoid PEP 668 restrictions
+    "python -m venv /app/venv",
+    # Activate virtual environment and install dependencies
+    "/app/venv/bin/python -m pip install --no-cache-dir -r requirements.txt",
+    "/app/venv/bin/python -m nltk.downloader punkt"
 ]
 
 [phases.build]
 cmds = ["echo 'Build phase complete'"]
 
 [start]
-cmd = "gunicorn --bind 0.0.0.0:$PORT app:app --timeout 600"
+cmd = "/app/venv/bin/gunicorn --bind 0.0.0.0:$PORT app:app --timeout 600"
