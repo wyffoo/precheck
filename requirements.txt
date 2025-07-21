@@ -8,3 +8,5 @@ sentence-transformers
 pytesseract
 Pillow
 chromadb
+gunicorn==20.1.0  # add this line to your requirements.txt
+
