@@ -1,1 +1,1 @@
-web: /app/venv/bin/gunicorn --bind 0.0.0.0:$PORT app:app --timeout 600
+web: python app.py
