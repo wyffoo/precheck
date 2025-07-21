@@ -1,10 +1,10 @@
 flask
-flask-cors
-gunicorn
-sentence-transformers
-chromadb
+flask_cors
+werkzeug
 nltk
-pytesseract
 requests
 beautifulsoup4
+sentence-transformers
+pytesseract
 Pillow
+chromadb
