@@ -6,8 +6,9 @@ nixPkgs = ["python310", "python310Packages.pip", "python310Packages.setuptools"]
 cmds = [
     # Create virtual environment
     "python -m venv /app/venv",
-    # Install dependencies and verify gunicorn
+    # Install dependencies
     "/app/venv/bin/python -m pip install --no-cache-dir -r requirements.txt",
+    # Install gunicorn explicitly
     "/app/venv/bin/pip install gunicorn==20.1.0",  # Explicitly install gunicorn
     "/app/venv/bin/pip show gunicorn",  # Debug: Verify gunicorn installation
     "/app/venv/bin/python -m nltk.downloader punkt"
@@ -17,4 +18,6 @@ cmds = [
 cmds = ["echo 'Build phase complete'"]
 
 [start]
-cmd = "/app/venv/bin/gunicorn --bind 0.0.0.0:$PORT app:app --timeout 600"
+# Use 'sh -c' to ensure the environment variables are properly handled
+cmd = "sh -c '/app/venv/bin/gunicorn --bind 0.0.0.0:$PORT app:app --timeout 600'"
+
