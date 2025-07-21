@@ -4,10 +4,12 @@ nixPkgs = ["python310", "python310Packages.pip", "python310Packages.setuptools"]
 
 [phases.install]
 cmds = [
-    # Create a virtual environment to avoid PEP 668 restrictions
+    # Create virtual environment
     "python -m venv /app/venv",
-    # Activate virtual environment and install dependencies
+    # Install dependencies and verify gunicorn
     "/app/venv/bin/python -m pip install --no-cache-dir -r requirements.txt",
+    "/app/venv/bin/pip install gunicorn==20.1.0",  # Explicitly install gunicorn
+    "/app/venv/bin/pip show gunicorn",  # Debug: Verify gunicorn installation
     "/app/venv/bin/python -m nltk.downloader punkt"
 ]
 
