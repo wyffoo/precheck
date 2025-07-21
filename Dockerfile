@@ -16,9 +16,13 @@ RUN pip install gunicorn
 # 让端口 8080 可用于容器外部（作为默认值）
 EXPOSE 8080
 
-# 定义环境变量 (如果没有明确给定 PORT，默认绑定到 8080)
+# 定义环境变量
 ENV PORT=8080
 ENV PYTHONUNBUFFERED=1
 
-# 使用 exec 形式运行 gunicorn，确保 PORT 变量正确解析
-CMD exec gunicorn --bind 0.0.0.0:$PORT app:app --timeout 600
+# 复制 entrypoint 脚本
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# 使用 entrypoint 脚本启动应用
+CMD ["/entrypoint.sh"]
