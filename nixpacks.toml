@@ -1,0 +1,11 @@
+[phases.setup]
+aptPkgs = ["tesseract-ocr", "libtesseract-dev"]
+
+[phases.install]
+cmds = ["pip install --no-cache-dir -r requirements.txt", "python -m nltk.downloader punkt"]
+
+[phases.build]
+cmds = ["echo 'Build phase complete'"]
+
+[start]
+cmd = "gunicorn --bind 0.0.0.0:$PORT app:app --timeout 600"
