@@ -1,10 +1,8 @@
 [phases.setup]
-aptPkgs = ["tesseract-ocr", "libtesseract-dev"]
-# Specify Python version to ensure pip is available
-nixPkgs = ["python39", "python39Packages.pip"]
+aptPkgs = ["tesseract-ocr", "libtesseract-dev", "gcc", "g++", "make"]
+nixPkgs = ["python39", "python39Packages.pip", "python39Packages.setuptools"]
 
 [phases.install]
-# Install Python dependencies and NLTK data
 cmds = [
     "python -m ensurepip --upgrade",
     "python -m pip install --no-cache-dir -r requirements.txt",
