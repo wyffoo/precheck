@@ -9,7 +9,6 @@ from sentence_transformers import SentenceTransformer
 import chromadb
 from nltk.tokenize import sent_tokenize
 from PIL import Image
-import easyocr
 import pytesseract
 from flask import Flask, request, jsonify
 from flask_cors import CORS
