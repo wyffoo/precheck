@@ -1,0 +1,323 @@
+Received: from DU0PR07MB9243.eurprd07.prod.outlook.com (2603:10a6:10:42c::17)
+ by PAWPR07MB9758.eurprd07.prod.outlook.com with HTTPS; Mon, 24 Mar 2025
+ 10:34:05 +0000
+Received: from DU2PR07MB8319.eurprd07.prod.outlook.com (2603:10a6:10:27c::18)
+ by DU0PR07MB9243.eurprd07.prod.outlook.com (2603:10a6:10:42c::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8534.42; Mon, 24 Mar
+ 2025 10:34:04 +0000
+Received: from DU2PR07MB8319.eurprd07.prod.outlook.com
+ ([fe80::8df3:b9f3:11f7:97e7]) by DU2PR07MB8319.eurprd07.prod.outlook.com
+ ([fe80::8df3:b9f3:11f7:97e7%5]) with mapi id 15.20.8534.040; Mon, 24 Mar 2025
+ 10:34:04 +0000
+From: "Honore Ho (Nokia)" <honore.ho@nokia.com>
+To: "Yifan Wang (Nokia)" <yifan.wang@nokia.com>
+Subject: FW: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery
+ successful
+Thread-Topic: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery
+ successful
+Thread-Index:
+	Adsfkni4R4Xut3tdRjK4DW2VR7gCgQADOGMQAAcSP/AAAzvDUAAGwCmAAAIY1RsAHPvfEB8SFhOA
+Date: Mon, 24 Mar 2025 10:34:03 +0000
+Message-ID:
+	<DU2PR07MB8319567DBF22E1035C707B5EEFA42@DU2PR07MB8319.eurprd07.prod.outlook.com>
+References:
+	<DU2PR07MB8319CA16DA8E489AB2A98E43EF462@DU2PR07MB8319.eurprd07.prod.outlook.com>
+ <PAXPR07MB78546E9130E2D521A5F3D91A88462@PAXPR07MB7854.eurprd07.prod.outlook.com>
+ <DU2PR07MB8319DCCD6A7E617CF6B1D6ABEF462@DU2PR07MB8319.eurprd07.prod.outlook.com>
+ <DU2PR07MB8319ED53AC88C9F21D56C025EF462@DU2PR07MB8319.eurprd07.prod.outlook.com>
+ <DU0PR07MB916110B54ECE5031B1A9D742F3462@DU0PR07MB9161.eurprd07.prod.outlook.com>
+ <GV2PR07MB9036D2DBD89BDFD637E34A4DFF462@GV2PR07MB9036.eurprd07.prod.outlook.com>
+ <PR3PR07MB83066E63D705398C19BF38C3EF472@PR3PR07MB8306.eurprd07.prod.outlook.com>
+In-Reply-To:
+	<PR3PR07MB83066E63D705398C19BF38C3EF472@PR3PR07MB8306.eurprd07.prod.outlook.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Internal
+X-MS-Exchange-Organization-AuthMechanism: 04
+X-MS-Exchange-Organization-AuthSource: DU2PR07MB8319.eurprd07.prod.outlook.com
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-Network-Message-Id:
+	eaab7d55-672c-44f9-43ff-08dd6abf6609
+X-MS-Exchange-Organization-SCL: 1
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+msip_labels:
+x-ms-publictraffictype: Email
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944506478)(944626604)(920097)(425001)(930097)(140003);
+X-Microsoft-Antispam-Message-Info:
+	K7bqbFeCtOWJQsC/WgWGgCas/zz3cwvhlcHl9UZVeJ5piitvMKuZMY0GqITgDAUUdyQ4AVofmDtYG8L9OgELem+XAMw0mTqghe2xGWu/BD0uRoxpcDBTJnknucLqsVlVB04EH9MooaSPVpXJ23y9W8n4CN0bol11CN3Hjmx9iGGhQTgWhjUvq2hcqgDvo2ku47+tDWz52INzpTM4y6r/Wx6FNcv6mpPWCbD3V8hxLjL3Hn1a5yMPztxDEqlTR9Xg8acoIYTtmcoOSTNpgUEH7tE2S/xtAIgL/HdW8sAgBbEqp6Sz8Bw480keEP+Acvouspgn2kUtc0YjImOcPOiqwxKIeXeRr6EOldnCHvzqrMzryJclhjf2yeSnVpCZ90WtnDatJm606dubJLGikJ1dyog0UOYJ6AihV+EJGLJ2ZFEQ5iAax5G618jYSWDa6NXKVvuFsmZ8lDaA3XRCI1RuQwQefHfLDaRE46lVc2mvFz7QzOKbbrkGKUsTv4Rp+aIjRW9jy3CSxWZTsI65tJgUdQ/5eX5wb7HA3YD78oJadgJWJfM9k0yApxCgsRywqudS7HtWHDxypsmHsxUUnE3KkMjczjfsb5jSKpJYP6bUtufIDi2CEteaD7/t2l6A2fxuYPnKaqL+v4kzmORu6hIpIzEiXDB12/oKX6Cc7pgZmcBMUjCxnAYBKZEXc52W2uR6b2bz+IMEvZJmjZHDLGbMlCQ4Y4iinjD9m3GtnXWjAYMrz76HhmLiey8JAiYRhSvARtdw8B0wTpQ7GJms4PrQG/Ttu1EskXKi1RNrHt9CiR0=
+Content-Type: multipart/alternative;
+	boundary="_000_DU2PR07MB8319567DBF22E1035C707B5EEFA42DU2PR07MB8319eurp_"
+MIME-Version: 1.0
+
+--_000_DU2PR07MB8319567DBF22E1035C707B5EEFA42DU2PR07MB8319eurp_
+Content-Type: text/plain; charset="us-ascii"
+
+Second example
+
+From: Honore Ho (Nokia)
+Sent: Thursday, October 17, 2024 8:45 AM
+To: Riku Ahonen (Nokia) <riku.ahonen@nokia.com>; Satish Bysany (Nokia) <satish.bysany@nokia.com>
+Cc: Tarek Saket (Nokia) <tarek.saket@nokia.com>; Fabienne Magueur (Nokia) <fabienne.magueur@nokia.com>
+Subject: RE: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful
+
+Hi Riku and Satish;
+Thanks a lot for your analysis.
+I will check with a rollback if we have the same behavior and let you know if a difference has been depicted out.
+Honore
+
+From: Riku Ahonen (Nokia) <riku.ahonen@nokia.com<mailto:riku.ahonen@nokia.com>>
+Sent: Wednesday, October 16, 2024 6:57 PM
+To: Satish Bysany (Nokia) <satish.bysany@nokia.com<mailto:satish.bysany@nokia.com>>; Honore Ho (Nokia) <honore.ho@nokia.com<mailto:honore.ho@nokia.com>>
+Cc: Tarek Saket (Nokia) <tarek.saket@nokia.com<mailto:tarek.saket@nokia.com>>; Fabienne Magueur (Nokia) <fabienne.magueur@nokia.com<mailto:fabienne.magueur@nokia.com>>
+Subject: Re: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful
+
+Hi,
+
+It is a normal print. It is being printed periodically with some other status messages. I can see that the message is a bit misleading, there wasn't any recovery happening on the board.
+
+Have you not seen this before? Which is the previous software build where you didn't get it? I don't remember there being changes to this message recently. If you can provide the previous build where this wasn't seen I could check if there was some something changed after all.
+
+-Riku
+________________________________
+From: Satish Bysany (Nokia) <satish.bysany@nokia.com<mailto:satish.bysany@nokia.com>>
+Sent: 16 October 2024 10:54
+To: Riku Ahonen (Nokia) <riku.ahonen@nokia.com<mailto:riku.ahonen@nokia.com>>; Satish Bysany (Nokia) <satish.bysany@nokia.com<mailto:satish.bysany@nokia.com>>; Honore Ho (Nokia) <honore.ho@nokia.com<mailto:honore.ho@nokia.com>>
+Cc: Tarek Saket (Nokia) <tarek.saket@nokia.com<mailto:tarek.saket@nokia.com>>; Fabienne Magueur (Nokia) <fabienne.magueur@nokia.com<mailto:fabienne.magueur@nokia.com>>
+Subject: FW: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful
+
+
+Hi, Riku will look into this.
+
+
+
+--
+
+Satish Bysany
+
+
+
+From: Honore Ho (Nokia) <honore.ho@nokia.com<mailto:honore.ho@nokia.com>>
+Sent: Wednesday, October 16, 2024 3:46 PM
+To: Satish Bysany (Nokia) <satish.bysany@nokia.com<mailto:satish.bysany@nokia.com>>
+Cc: Tarek Saket (Nokia) <tarek.saket@nokia.com<mailto:tarek.saket@nokia.com>>; Fabienne Magueur (Nokia) <fabienne.magueur@nokia.com<mailto:fabienne.magueur@nokia.com>>
+Subject: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful
+
+
+
+Hi Satish;
+
+Could you please have a look at below syslog traces where we find many times
+
+"
+
+INF/l1nrt_application, 99/INF L1SW-NRT: reset_alarm_state leka rx recovery successful, reset rx recovery alarm countdown to 5
+
+"
+
+Hereafter the full syslog + snapshot.
+
+Thanks a lot again for your feedback.
+
+\\eseefsn50.emea.nsn-net.net\rotta4internal\5G_3\paris-saclay\CustomerConfigs\TL335_ATT\Pronto\leka_rx_recovery_successful<file://eseefsn50.emea.nsn-net.net/rotta4internal/5G_3/paris-saclay/CustomerConfigs/TL335_ATT/Pronto/leka_rx_recovery_successful>
+
+
+
+Is that also expected or abnormal?
+
+BTS is steady and traces were collected after a while after trunk update to reflect latest Sw status.
+
+
+
+Thanks
+
+
+
+PS: find hereafter an extract of syslog:
+
+
+
+
+
+Honore
+
+--_000_DU2PR07MB8319567DBF22E1035C707B5EEFA42DU2PR07MB8319eurp_
+Content-Type: text/html; charset="us-ascii"
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<meta name="Generator" content="Microsoft Word 15 (filtered medium)">
+<!--[if !mso]><style>v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style><![endif]--><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:DengXian;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+@font-face
+	{font-family:Aptos;}
+@font-face
+	{font-family:"\@DengXian";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#467886;
+	text-decoration:underline;}
+p.xmsonormal, li.xmsonormal, div.xmsonormal
+	{mso-style-name:x_msonormal;
+	margin:0cm;
+	font-size:12.0pt;
+	font-family:"Aptos",sans-serif;}
+span.EmailStyle21
+	{mso-style-type:personal-reply;
+	font-family:"Aptos",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;
+	mso-ligatures:none;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext="edit" spidmax="1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext="edit">
+<o:idmap v:ext="edit" data="1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang="EN-US" link="#467886" vlink="purple" style="word-wrap:break-word">
+<div class="WordSection1">
+<p class="MsoNormal"><span style="font-size:11.0pt">Second example<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div style="border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm 0cm 0cm">
+<p class="MsoNormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"> Honore Ho (Nokia)
+<br>
+<b>Sent:</b> Thursday, October 17, 2024 8:45 AM<br>
+<b>To:</b> Riku Ahonen (Nokia) &lt;riku.ahonen@nokia.com&gt;; Satish Bysany (Nokia) &lt;satish.bysany@nokia.com&gt;<br>
+<b>Cc:</b> Tarek Saket (Nokia) &lt;tarek.saket@nokia.com&gt;; Fabienne Magueur (Nokia) &lt;fabienne.magueur@nokia.com&gt;<br>
+<b>Subject:</b> RE: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful<o:p></o:p></span></p>
+</div>
+</div>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><span style="font-size:11.0pt">Hi Riku and Satish;<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt">Thanks a lot for your analysis.<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt">I will check with a rollback if we have the same behavior and let you know if a difference has been depicted out.<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt">Honore<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt"><o:p>&nbsp;</o:p></span></p>
+<div>
+<div style="border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm 0cm 0cm">
+<p class="MsoNormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"> Riku Ahonen (Nokia) &lt;<a href="mailto:riku.ahonen@nokia.com">riku.ahonen@nokia.com</a>&gt;
+<br>
+<b>Sent:</b> Wednesday, October 16, 2024 6:57 PM<br>
+<b>To:</b> Satish Bysany (Nokia) &lt;<a href="mailto:satish.bysany@nokia.com">satish.bysany@nokia.com</a>&gt;; Honore Ho (Nokia) &lt;<a href="mailto:honore.ho@nokia.com">honore.ho@nokia.com</a>&gt;<br>
+<b>Cc:</b> Tarek Saket (Nokia) &lt;<a href="mailto:tarek.saket@nokia.com">tarek.saket@nokia.com</a>&gt;; Fabienne Magueur (Nokia) &lt;<a href="mailto:fabienne.magueur@nokia.com">fabienne.magueur@nokia.com</a>&gt;<br>
+<b>Subject:</b> Re: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful<o:p></o:p></span></p>
+</div>
+</div>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">Hi,<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">It is a normal print. It is being printed periodically with some other status messages. I can see that the message is a bit misleading, there wasn't any recovery
+ happening on the board.<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">Have you not seen this before? Which is the previous software build where you didn't get it? I don't remember there being changes to this message recently. If you
+ can provide the previous build where this wasn't seen I could check if there was some something changed after all.<o:p></o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"><o:p>&nbsp;</o:p></span></p>
+</div>
+<div>
+<p class="MsoNormal"><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">-Riku<o:p></o:p></span></p>
+</div>
+<div class="MsoNormal" align="center" style="text-align:center">
+<hr size="2" width="98%" align="center">
+</div>
+<div id="divRplyFwdMsg">
+<p class="MsoNormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif;color:black"> Satish Bysany (Nokia) &lt;<a href="mailto:satish.bysany@nokia.com">satish.bysany@nokia.com</a>&gt;<br>
+<b>Sent:</b> 16 October 2024 10:54<br>
+<b>To:</b> Riku Ahonen (Nokia) &lt;<a href="mailto:riku.ahonen@nokia.com">riku.ahonen@nokia.com</a>&gt;; Satish Bysany (Nokia) &lt;<a href="mailto:satish.bysany@nokia.com">satish.bysany@nokia.com</a>&gt;; Honore Ho (Nokia) &lt;<a href="mailto:honore.ho@nokia.com">honore.ho@nokia.com</a>&gt;<br>
+<b>Cc:</b> Tarek Saket (Nokia) &lt;<a href="mailto:tarek.saket@nokia.com">tarek.saket@nokia.com</a>&gt;; Fabienne Magueur (Nokia) &lt;<a href="mailto:fabienne.magueur@nokia.com">fabienne.magueur@nokia.com</a>&gt;<br>
+<b>Subject:</b> FW: [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful</span>
+<o:p></o:p></p>
+<div>
+<p class="MsoNormal">&nbsp;<o:p></o:p></p>
+</div>
+</div>
+<div>
+<div>
+<p class="xmsonormal"><span lang="EN-IN" style="font-size:9.0pt;font-family:&quot;Verdana&quot;,sans-serif;color:blue">Hi, Riku will look into this.</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span lang="EN-IN" style="font-size:9.0pt;font-family:&quot;Verdana&quot;,sans-serif;color:blue">&nbsp;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<div>
+<p class="xmsonormal"><span lang="EN-IN" style="font-size:9.0pt;font-family:&quot;Verdana&quot;,sans-serif;color:blue">--</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span lang="EN-IN" style="font-size:9.0pt;font-family:&quot;Verdana&quot;,sans-serif;color:blue">Satish Bysany</span><span lang="EN-IN"><o:p></o:p></span></p>
+</div>
+<p class="xmsonormal"><span lang="EN-IN" style="font-size:9.0pt;font-family:&quot;Verdana&quot;,sans-serif;color:blue">&nbsp;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<div>
+<div style="border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0cm 0cm 0cm">
+<p class="xmsonormal"><b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif">From:</span></b><span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"> Honore Ho (Nokia) &lt;<a href="mailto:honore.ho@nokia.com">honore.ho@nokia.com</a>&gt;
+<br>
+<b>Sent:</b> Wednesday, October 16, 2024 3:46 PM<br>
+<b>To:</b> Satish Bysany (Nokia) &lt;<a href="mailto:satish.bysany@nokia.com">satish.bysany@nokia.com</a>&gt;<br>
+<b>Cc:</b> Tarek Saket (Nokia) &lt;<a href="mailto:tarek.saket@nokia.com">tarek.saket@nokia.com</a>&gt;; Fabienne Magueur (Nokia) &lt;<a href="mailto:fabienne.magueur@nokia.com">fabienne.magueur@nokia.com</a>&gt;<br>
+<b>Subject:</b> [Precheck-16-oct-2024] Syslog reset_alarm_state leka rx recovery successful</span><span lang="EN-IN"><o:p></o:p></span></p>
+</div>
+</div>
+<p class="xmsonormal"><span lang="EN-IN">&nbsp;<o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">Hi Satish;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">Could you please have a look at below
+<u>syslog</u> traces where we find many times </span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">&#8220;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt;color:black;background:yellow">INF/l1nrt_application, 99/INF L1SW-NRT: reset_alarm_state leka rx recovery successful, reset rx recovery alarm countdown to 5</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">&#8220;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">Hereafter the full syslog + snapshot.</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">Thanks a lot again for your feedback.</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt"><a href="file://eseefsn50.emea.nsn-net.net/rotta4internal/5G_3/paris-saclay/CustomerConfigs/TL335_ATT/Pronto/leka_rx_recovery_successful">\\eseefsn50.emea.nsn-net.net\rotta4internal\5G_3\paris-saclay\CustomerConfigs\TL335_ATT\Pronto\leka_rx_recovery_successful</a></span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">&nbsp;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">Is that also expected or abnormal?</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">BTS is steady and traces were collected after a while after trunk update to reflect latest Sw status.</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">&nbsp;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">Thanks</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">&nbsp;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">PS: find hereafter an extract of syslog:</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">&nbsp;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">&nbsp;</span><span lang="EN-IN"><o:p></o:p></span></p>
+<p class="xmsonormal"><span style="font-size:11.0pt">Honore</span><span lang="EN-IN"><o:p></o:p></span></p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_DU2PR07MB8319567DBF22E1035C707B5EEFA42DU2PR07MB8319eurp_--

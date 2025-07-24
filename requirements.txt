@@ -8,4 +8,7 @@ sentence-transformers
 chromadb
 pillow
 gunicorn
-easyocr
+python-doctr
+torch
+torchvision
+opencv-python

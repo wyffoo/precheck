@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from pathlib import Path
 import sqlite3, os
 import nltk
-
+import uuid
 from ai_extract import parse_eml, extract_description, extract_resolution, extract_image_text
 
 try:
@@ -30,6 +30,7 @@ SUPPORTED_EXTENSIONS = {
     ".jpg": extract_image_text,
     ".jpeg": extract_image_text,
     ".png": extract_image_text,
+    ".txt": lambda path: open(path, 'r', encoding='utf-8').read(),
 }
 
 def init_db():
@@ -96,6 +97,7 @@ def extract_from_uploaded_files():
 
     all_texts = []
     main_filename = ""
+    is_image_file = False
 
     for file in files:
         filename = secure_filename(file.filename)
@@ -115,13 +117,18 @@ def extract_from_uploaded_files():
         if not main_filename and ext == ".eml":
             main_filename = filename
 
+        if ext in [".jpg", ".jpeg", ".png"]:
+            is_image_file = True
+
     if not all_texts:
         return jsonify({"error": "No valid content extracted"}), 400
 
     merged_text = "\n\n".join(all_texts)
-    used_filename = main_filename or "manual_entry.eml"
+    unique_id = uuid.uuid4().hex[:8]
+    used_filename = main_filename or f"manual_entry_{unique_id}.eml"
 
     try:
+
         description_part = extract_description(merged_text, used_filename)
         resolution_part = extract_resolution(merged_text, used_filename)
 
@@ -140,20 +147,49 @@ def extract_from_uploaded_files():
 
 @app.route("/api/records", methods=["GET"])
 def get_records():
+    search = request.args.get("search", "").lower()
+    page = int(request.args.get("page", 1))
+    per_page = 20
+
     conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
     c = conn.cursor()
-    c.execute("SELECT * FROM precheck_records ORDER BY id DESC")
-    rows = c.fetchall()
-    columns = [desc[0] for desc in c.description]
+
+    if search:
+        query = f"""
+            SELECT * FROM precheck_records
+            WHERE LOWER(description) LIKE ? OR LOWER(title) LIKE ?
+            ORDER BY id DESC
+            LIMIT ? OFFSET ?;
+        """
+        count_query = "SELECT COUNT(*) FROM precheck_records WHERE LOWER(description) LIKE ? OR LOWER(title) LIKE ?;"
+        args = [f"%{search}%", f"%{search}%", per_page, (page - 1) * per_page]
+        count_args = [f"%{search}%", f"%{search}%"]
+    else:
+        query = "SELECT * FROM precheck_records ORDER BY id DESC LIMIT ? OFFSET ?;"
+        count_query = "SELECT COUNT(*) FROM precheck_records;"
+        args = [per_page, (page - 1) * per_page]
+        count_args = []
+
+    c.execute(query, args)
+    records = [dict(row) for row in c.fetchall()]
+
+    c.execute(count_query, count_args)
+    total = c.fetchone()[0]
+    total_pages = max((total + per_page - 1) // per_page, 1)
+
     conn.close()
-    return jsonify([dict(zip(columns, row)) for row in rows])
+    return jsonify({
+        "records": records,
+        "totalPages": total_pages
+    })
 
 @app.route("/api/records", methods=["POST"])
 def insert_record():
     try:
         data = request.json
         save_to_database(data.get("filename", "manual_entry.eml"), data)
-        return get_records()  # Return full list after insertion
+        return get_records()
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -177,7 +213,7 @@ def patch_record(record_id):
             c.execute(f"UPDATE precheck_records SET {', '.join(updates)} WHERE id = ?", values + [record_id])
             conn.commit()
             conn.close()
-        return get_records()  # Return full list after update
+        return get_records()
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -189,7 +225,7 @@ def delete_record(record_id):
         c.execute("DELETE FROM precheck_records WHERE id = ?", (record_id,))
         conn.commit()
         conn.close()
-        return get_records()  # Return full list after delete
+        return get_records()
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
