@@ -18,9 +18,9 @@ import json
 import sqlite3
 import time
 import logging
-from google.cloud import vision
 import os
-
+from PIL import Image
+import pytesseract
 
 # ========== CONFIG ==========
 LLM_GATEWAY_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkFFUHJlY2hlY2tUZXN0SUVUTWVzc2FnZXNMTE1Ub29sIiwiT2JqZWN0SUQiOiJERUUyODY5MS04NkQyLTQwMEEtQjM3Ri1FNjE2RTI4NTY1ODAiLCJ3b3JrU3BhY2VOYW1lIjoiVlIxNzE5QUVQcmVjaGVja1Rlc3RJRVRNZXNzYWdlc0xMTSIsIm5iZiI6MTc1MTQ1NzQyOCwiZXhwIjoxNzgyOTkzNDI4LCJpYXQiOjE3NTE0NTc0Mjh9.bgDDcTkVbrndgqT0LZ5rQbZi_vsbQ_FsCKdrkF0an3o"
@@ -67,22 +67,13 @@ def clean_text(text):
         cleaned.append(line)
     return "\n".join(cleaned)
 
-# 设定密钥路径（项目根目录）
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_vision_key.json"
-
 def extract_image_text(img_path):
     try:
-        client = vision.ImageAnnotatorClient()
-        with open(img_path, "rb") as image_file:
-            content = image_file.read()
-        image = vision.Image(content=content)
-        response = client.text_detection(image=image)
-        texts = response.text_annotations
-        if not texts:
-            return ""
-        return texts[0].description.strip()
+        img = Image.open(img_path)
+        text = pytesseract.image_to_string(img, lang='eng')
+        return text.strip()
     except Exception as e:
-        logger.error(f"[Google Vision OCR] Failed to extract text from image {img_path}: {e}")
+        logger.error(f"Failed to extract text from image {img_path}: {e}")
         return ""
 
 def parse_eml(eml_path):
