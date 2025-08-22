@@ -12,7 +12,7 @@ from requests.auth import HTTPBasicAuth
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ========= 你现有的提取模块 =========
-from ai_extract import parse_eml, extract_description, extract_resolution, extract_image_text
+from ai_extract import parse_eml,parse_msg,extract_description, extract_resolution, extract_image_text
 
 # ========= NLTK 依赖 =========
 try:
@@ -36,6 +36,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 SUPPORTED_EXTENSIONS = {
     ".eml": parse_eml,
+    ".msg": parse_msg,
     ".jpg": extract_image_text,
     ".jpeg": extract_image_text,
     ".png": extract_image_text,
@@ -87,30 +88,36 @@ INSERT INTO precheck_records (
     root_cause, explanation, category
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ON CONFLICT(pr_id) DO UPDATE SET
-    filename=excluded.filename,
-    description=excluded.description,
-    title=excluded.title,
-    softwareRelease=excluded.softwareRelease,
-    softwareBuild=excluded.softwareBuild,
-    attachmentIds=excluded.attachmentIds,
-    groupIncharge=excluded.groupIncharge,
-    identification=excluded.identification,
-    resolution=excluded.resolution,
-    subSystem=excluded.subSystem,
-    root_cause=excluded.root_cause,
-    -- explanation 如新值为空则保留旧值
-    explanation=COALESCE(NULLIF(excluded.explanation, ''), precheck_records.explanation),
-    -- category 如新值为空则保留旧值
-    category=COALESCE(NULLIF(excluded.category, ''), precheck_records.category)
+    filename           = COALESCE(NULLIF(excluded.filename, ''),           precheck_records.filename),
+    description        = COALESCE(NULLIF(excluded.description, ''),        precheck_records.description),
+    title              = COALESCE(NULLIF(excluded.title, ''),              precheck_records.title),
+    softwareRelease    = COALESCE(NULLIF(excluded.softwareRelease, ''),    precheck_records.softwareRelease),
+    softwareBuild      = COALESCE(NULLIF(excluded.softwareBuild, ''),      precheck_records.softwareBuild),
+    attachmentIds      = COALESCE(NULLIF(excluded.attachmentIds, ''),      precheck_records.attachmentIds),
+    groupIncharge      = COALESCE(NULLIF(excluded.groupIncharge, ''),      precheck_records.groupIncharge),
+    identification     = COALESCE(NULLIF(excluded.identification, ''),     precheck_records.identification),
+    resolution         = COALESCE(NULLIF(excluded.resolution, ''),         precheck_records.resolution),
+    subSystem          = COALESCE(NULLIF(excluded.subSystem, ''),          precheck_records.subSystem),
+    root_cause         = COALESCE(NULLIF(excluded.root_cause, ''),         precheck_records.root_cause),
+    explanation        = COALESCE(NULLIF(excluded.explanation, ''),        precheck_records.explanation),
+    category           = COALESCE(NULLIF(excluded.category, ''),           precheck_records.category)
 """
 
+
 def save_to_database(filename, structured):
-    """用于 /api/extract 的保存：同样使用 UPSERT，避免重复"""
+    def _none_if_blank(v):
+        if v is None:
+            return None
+        s = str(v).strip()
+        return None if s == "" else s
+
+    pr_id_val = _none_if_blank(structured.get("pr_id"))  # ✅ 空置为 None
+
     conn = sqlite3.connect(DB_PATH)
     conn.execute(UPSERT_SQL, (
         filename,
         structured.get("description", ""),
-        structured.get("pr_id", ""),          # 注意：为空的 pr_id 不会触发唯一冲突（SQLite 中 NULL 去重无效），这符合你之前“手工录入”的场景
+        pr_id_val,                                # ✅ 这里用 None 而不是 ""
         structured.get("title", ""),
         structured.get("softwareRelease", ""),
         structured.get("softwareBuild", ""),
@@ -125,6 +132,7 @@ def save_to_database(filename, structured):
     ))
     conn.commit()
     conn.close()
+
 
 # ========= /api/extract =========
 @app.route("/api/extract", methods=["POST"])
@@ -155,7 +163,7 @@ def extract_from_uploaded_files():
         if extracted_text.strip():
             all_texts.append(f"--- {filename} ---\n" + extracted_text)
 
-        if not main_filename and ext == ".eml":
+        if not main_filename and ext in [".eml", ".msg", ".txt"]:
             main_filename = filename
 
         if ext in [".jpg", ".jpeg", ".png"]:
@@ -174,13 +182,12 @@ def extract_from_uploaded_files():
 
         result = {**description_part, **resolution_part}
         result.update({
-            "pr_id": "", "title": "", "softwareRelease": "",
+            "pr_id": None, "title": "", "softwareRelease": "",
             "softwareBuild": "", "attachmentIds": "", "groupIncharge": "",
             "identification": "", "explanation": "", "subSystem": "",
             "root_cause": "", "category": ""
         })
 
-        save_to_database(used_filename, result)
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -408,7 +415,7 @@ def pronto_sync():
         vals = (
             it.get("pr_id") or f"bulk_{state or 'no_state'}",  # filename
             it.get("description",""),
-            str(it.get("pr_id","")),
+            pr_id,  
             it.get("title",""),
             it.get("softwareRelease",""),
             it.get("softwareBuild",""),
@@ -431,4 +438,5 @@ def pronto_sync():
 # ========= 入口 =========
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
