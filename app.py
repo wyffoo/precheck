@@ -11,10 +11,10 @@ import requests
 from requests.auth import HTTPBasicAuth
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ========= 你现有的提取模块 =========
-from ai_extract import parse_eml,parse_msg,extract_description, extract_resolution, extract_image_text
+# ========= Your existing extraction module =========
+from ai_extract import parse_eml, parse_msg, extract_description, extract_resolution, extract_image_text
 
-# ========= NLTK 依赖 =========
+# ========= NLTK Dependencies =========
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
@@ -25,7 +25,7 @@ try:
 except LookupError:
     nltk.download('punkt_tab')
 
-# ========= Flask 基础 =========
+# ========= Flask Setup =========
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
@@ -43,7 +43,7 @@ SUPPORTED_EXTENSIONS = {
     ".txt": lambda path: open(path, 'r', encoding='utf-8').read(),
 }
 
-# ========= PRONTO 同步配置（硬编码）=========
+# ========= PRONTO sync config (hardcoded) =========
 PRONTO_USER = "wyifan"
 PRONTO_PASS = "Wyywjh1018"
 PRONTO_BASE = "https://pronto.ext.net.nokia.com/prontoapi/rest/api/latest"
@@ -52,7 +52,7 @@ FA_WORKERS = 5
 MAX_RETRIES = 3
 SLEEP_BETWEEN_PAGES = 0.3
 
-# ========= DB 初始化（含唯一索引）=========
+# ========= Database Initialization (with unique index) =========
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -75,12 +75,12 @@ def init_db():
             category TEXT
         );
     """)
-    # 以 pr_id 去重；确保不重复
+    # Deduplicate based on pr_id
     c.execute("CREATE UNIQUE INDEX IF NOT EXISTS ux_precheck_pr_id ON precheck_records(pr_id);")
     conn.commit()
     conn.close()
 
-# ========= 通用 UPSERT SQL（以 pr_id 唯一）=========
+# ========= Generic UPSERT SQL (dedup by pr_id) =========
 UPSERT_SQL = """
 INSERT INTO precheck_records (
     filename, description, pr_id, title, softwareRelease, softwareBuild,
@@ -103,7 +103,6 @@ ON CONFLICT(pr_id) DO UPDATE SET
     category           = COALESCE(NULLIF(excluded.category, ''),           precheck_records.category)
 """
 
-
 def save_to_database(filename, structured):
     def _none_if_blank(v):
         if v is None:
@@ -111,13 +110,13 @@ def save_to_database(filename, structured):
         s = str(v).strip()
         return None if s == "" else s
 
-    pr_id_val = _none_if_blank(structured.get("pr_id"))  # ✅ 空置为 None
+    pr_id_val = _none_if_blank(structured.get("pr_id"))
 
     conn = sqlite3.connect(DB_PATH)
     conn.execute(UPSERT_SQL, (
         filename,
         structured.get("description", ""),
-        pr_id_val,                                # ✅ 这里用 None 而不是 ""
+        pr_id_val,
         structured.get("title", ""),
         structured.get("softwareRelease", ""),
         structured.get("softwareBuild", ""),
@@ -132,7 +131,6 @@ def save_to_database(filename, structured):
     ))
     conn.commit()
     conn.close()
-
 
 # ========= /api/extract =========
 @app.route("/api/extract", methods=["POST"])
@@ -192,7 +190,7 @@ def extract_from_uploaded_files():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# ========= /api/records（原样保留）=========
+# ========= /api/records CRUD =========
 @app.route("/api/records", methods=["GET"])
 def get_records():
     search = request.args.get("search", "").lower()
@@ -277,7 +275,7 @@ def delete_record(record_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# ========= PRONTO 同步实现（硬编码凭证）=========
+# ========= PRONTO Sync Helpers =========
 def _safe_text(x):
     return str(x or "").replace("\n", " ").replace("\r", " ").strip()
 
@@ -374,7 +372,7 @@ def _fetch_recent_prs_with_fa(limit):
                 "identification": fa['identification'],
                 "resolution": fa['resolution'],
                 "subSystem": fa['subSystem'],
-                "root_cause": fa['rootCause'],  # 注意表里是 root_cause
+                "root_cause": fa['rootCause'],  # matches table field
             })
         start_at += PAGE_SIZE
         time.sleep(SLEEP_BETWEEN_PAGES)
@@ -383,8 +381,8 @@ def _fetch_recent_prs_with_fa(limit):
 @app.route("/api/pronto/sync", methods=["POST"])
 def pronto_sync():
     """
-    同步最近 N 条 PR 到 SQLite。
-    Body 可选：{ "limit": 100, "autoCategorizeNonCNN": false }
+    Sync recent PRs from PRONTO into SQLite DB.
+    Body (optional): { "limit": 100, "autoCategorizeNonCNN": false }
     """
     payload = request.get_json(silent=True) or {}
     limit = int(payload.get("limit") or 100)
@@ -396,7 +394,7 @@ def pronto_sync():
         return jsonify({"ok": False, "error": f"PRONTO fetch failed: {e}"}), 500
 
     conn = sqlite3.connect(DB_PATH)
-    # 确保表和唯一索引存在
+    # Ensure table and unique index exist
     c = conn.cursor()
     c.execute("SELECT name FROM sqlite_master WHERE type='index' AND name='ux_precheck_pr_id'")
     if not c.fetchone():
@@ -415,7 +413,7 @@ def pronto_sync():
         vals = (
             it.get("pr_id") or f"bulk_{state or 'no_state'}",  # filename
             it.get("description",""),
-            pr_id,  
+            it.get("pr_id"),  
             it.get("title",""),
             it.get("softwareRelease",""),
             it.get("softwareBuild",""),
@@ -435,8 +433,7 @@ def pronto_sync():
 
     return jsonify({"ok": True, "count": n_upsert})
 
-# ========= 入口 =========
+# ========= Entry =========
 if __name__ == "__main__":
     init_db()
     app.run(host="0.0.0.0", port=5000, debug=True)
-

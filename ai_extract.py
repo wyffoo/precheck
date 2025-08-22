@@ -24,12 +24,12 @@ WORKSPACE_NAME = "VR1719AEPrecheckTestIETMessagesLLM"
 
 UPLOAD_FOLDER = "uploads"
 
-# ✅ 关键阈值（尽量全文扔给 LLM；超过阈值再做极轻量拼接）
-MAX_CONTEXT_CHARS = 9000        # 直接把全文喂给 LLM 的最大字符数
-CHUNK_SIZE_CHARS = 1200         # 超长文本时的分块大小
-K_PER_QUERY = 2                 # 每个查询意图挑选的 chunk 数
-MAX_JOIN_CHARS = 9000           # 大文本时最终拼接进 prompt 的字符上限
-MAX_LLM_TOKENS = 900            # 生成上限（配合一次输出三段）
+# ✅ Thresholds (prefer sending full text to LLM; only fallback to lightweight chunking if too large)
+MAX_CONTEXT_CHARS = 9000        # Max characters to send directly to LLM
+CHUNK_SIZE_CHARS = 1200         # Chunk size when splitting long text
+K_PER_QUERY = 2                 # Top-k chunks per semantic query
+MAX_JOIN_CHARS = 9000           # Upper bound on merged context size for prompts
+MAX_LLM_TOKENS = 900            # LLM generation limit (used for triplet extraction)
 
 # ========== SETUP ==========
 app = Flask(__name__)
@@ -42,7 +42,7 @@ logger = logging.getLogger("ai_extract")
 
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
-# 先声明函数；SUPPORTED_EXTENSIONS 里会调用
+# Function declarations (used later by SUPPORTED_EXTENSIONS)
 def parse_eml(eml_path): ...
 def parse_msg(msg_path): ...
 def extract_image_text(img_path): ...
@@ -56,9 +56,10 @@ SUPPORTED_EXTENSIONS = {
     ".txt": lambda path: open(path, "r", encoding="utf-8").read(),
 }
 
-# ========== SUPPORT ==========
+# ========== SUPPORT UTILITIES ==========
 def clean_text(text: str) -> str:
-    """温和清洗：去掉头部字段/客套/分隔线，但不因为“行很长”就丢内容。"""
+    """Gentle cleaning: remove headers, signatures, greetings, and separators,
+    but do NOT remove technical content just because lines are long."""
     lines = text.splitlines()
     cleaned = []
     for line in lines:
@@ -75,6 +76,7 @@ def clean_text(text: str) -> str:
     return "\n".join(cleaned)
 
 def extract_image_text(img_path: str) -> str:
+    """OCR: extract plain text from an image using Tesseract."""
     try:
         img = Image.open(img_path)
         text = pytesseract.image_to_string(img, lang="eng")
@@ -84,6 +86,7 @@ def extract_image_text(img_path: str) -> str:
         return ""
 
 def parse_eml(eml_path: str) -> str:
+    """Parse .eml file: read subject + extract plain/html body text and clean it."""
     try:
         with open(eml_path, "r", encoding="utf-8") as f:
             msg = email.message_from_file(f, policy=policy.default)
@@ -106,7 +109,8 @@ def parse_eml(eml_path: str) -> str:
         return ""
 
 def parse_msg(msg_path: str) -> str:
-    """解析 Outlook .msg：优先 HTML，没有则退回纯文本；拼接 subject + 清洗正文。"""
+    """Parse Outlook .msg file: prefer HTML body, fallback to plain text. 
+    Concatenate subject + cleaned body."""
     try:
         import extract_msg
         msg = extract_msg.Message(msg_path)
@@ -127,13 +131,14 @@ def parse_msg(msg_path: str) -> str:
         return ""
 
 def chunk_text_no_preface(body: str, max_chunk_size: int = CHUNK_SIZE_CHARS):
-    """不抽取 preface 的轻量分块；仅在文本很长时使用。"""
+    """Lightweight chunking (no preface extraction).
+    Only used when the text is very long."""
     try:
         sentences = sent_tokenize(body)
     except Exception:
         sentences = None
     if not sentences or len(" ".join(sentences)) < len(body) * 0.5:
-        # 句子切分效果欠佳时，按段落兜底
+        # Fallback: split by paragraphs
         sentences = re.split(r"\n{2,}", body)
 
     chunks, cur = [], ""
@@ -152,15 +157,18 @@ def chunk_text_no_preface(body: str, max_chunk_size: int = CHUNK_SIZE_CHARS):
 
 def _build_context_by_similarity(full_text: str, group: str) -> str:
     """
-    对于超长文本：不落地、不用向量库，内存里做一次小型相似度打分，拼接最相关片段。
+    For very long texts:
+    - Do not persist chunks, no vector DB
+    - Instead, perform in-memory semantic similarity
+    - Select the most relevant chunks for the prompt
     """
-    # 分块 + 去噪
+    # Chunking + denoising
     chunks = chunk_text_no_preface(full_text, max_chunk_size=CHUNK_SIZE_CHARS)
     chunks = [c for c in chunks if len(c.strip()) >= 30]
     if not chunks:
         return full_text[:MAX_JOIN_CHARS]
 
-    # 召回意图
+    # Query intentions (different for description vs resolution)
     if group == "desc":
         queries = [
             "What are the test actions performed?",
@@ -174,24 +182,23 @@ def _build_context_by_similarity(full_text: str, group: str) -> str:
             "How was the correction tested or validated?",
         ]
 
-    # 语义相似度（内存计算，无持久化）
+    # Compute semantic similarity (cosine similarity since embeddings are normalized)
     chunk_vecs = embedder.encode(chunks, normalize_embeddings=True)
     query_vecs = embedder.encode(queries, normalize_embeddings=True)
 
-    # 为每个查询挑选 top-k chunk，按得分从高到低合并，控制总体字符数
     selected_idx = []
     for qv in query_vecs:
-        sims = np.dot(chunk_vecs, qv)  # 因为 normalize_embeddings=True，所以是 cosine 相似度
+        sims = np.dot(chunk_vecs, qv)
         top = np.argsort(-sims)[:K_PER_QUERY]
         for idx in top:
             if idx not in selected_idx:
                 selected_idx.append(idx)
 
-    # 兜底：若还太少，顺序追加前几块
+    # Fallback: if too few, add first few sequential chunks
     if not selected_idx:
         selected_idx = list(range(min(len(chunks), 6)))
 
-    # 拼接直至达到上限
+    # Assemble chunks until size limit is reached
     assembled, total = [], 0
     for idx in selected_idx:
         c = chunks[idx]
@@ -200,7 +207,7 @@ def _build_context_by_similarity(full_text: str, group: str) -> str:
         assembled.append(c)
         total += len(c) + 2
 
-    # 仍过短就再顺序补齐
+    # Still too short → add more sequentially
     i = 0
     while total < MAX_JOIN_CHARS and i < len(chunks):
         if i not in selected_idx:
@@ -214,6 +221,7 @@ def _build_context_by_similarity(full_text: str, group: str) -> str:
     return "\n\n".join(assembled)
 
 def ask_llm_gateway(prompt: str, max_tokens: int = MAX_LLM_TOKENS) -> str:
+    """Send prompt to Nokia LLM Gateway and return model output."""
     headers = {
         "api-key": LLM_GATEWAY_API_KEY,
         "workspaceName": WORKSPACE_NAME,
@@ -239,14 +247,15 @@ def ask_llm_gateway(prompt: str, max_tokens: int = MAX_LLM_TOKENS) -> str:
 
 def make_triplet_prompt(full_text: str, group: str = "desc") -> str:
     """
-    group="desc" -> Detail Test Steps / Expected Result / Actual Result
-    group="reso" -> Workaround / Description of the correction / Test requirements
-    强制 LLM 按 EXACT 模板输出。
+    Build extraction prompt for LLM.
+    group="desc" -> extract [1. Detail Test Steps:], [2. Expected Result:], [3. Actual Result:]
+    group="reso" -> extract [1. Workaround:], [2. Description of the correction:], [3. Test requirements:]
+    Enforce EXACT output format (no extra text).
     """
     if group == "desc":
         header = "Extract these three sections: [1. Detail Test Steps:], [2. Expected Result:], [3. Actual Result:]"
         instructions = """Rules:
-- Output MUST be EXACTLY the following template, in English, with no extra commentary, no greetings, no extra headers, no markdown fences:
+- Output MUST be EXACTLY the following template:
 [1. Detail Test Steps:]
 <content>
 
@@ -261,7 +270,7 @@ def make_triplet_prompt(full_text: str, group: str = "desc") -> str:
     else:
         header = "Extract these three sections: [1. Workaround:], [2. Description of the correction:], [3. Test requirements:]"
         instructions = """Rules:
-- Output MUST be EXACTLY the following template, in English, with no extra commentary, no greetings, no extra headers, no markdown fences:
+- Output MUST be EXACTLY the following template:
 [1. Workaround:]
 <content>
 
@@ -271,7 +280,7 @@ def make_triplet_prompt(full_text: str, group: str = "desc") -> str:
 [3. Test requirements:]
 <content>
 - Focus ONLY on workaround logic, the implemented correction, and how it was tested/validated.
-- Remove names, email headers, signatures, and summaries.
+- Remove names, email headers, signatures.
 - Be concise and technical. Use bullet points only if they add technical value."""
 
     return f"""You are a telecom test engineer. {header}
@@ -282,11 +291,11 @@ def make_triplet_prompt(full_text: str, group: str = "desc") -> str:
 {full_text[:MAX_CONTEXT_CHARS]}
 ========= END ========="""
 
-# ========== CORE EXTRACT (尽可能全文扔给 LLM；只有超长才轻量拼接) ==========
+# ========== CORE EXTRACTION ==========
 def extract_description(body: str, email_id: str):
     body = clean_text(body)
 
-    # 已是标准三段 → 直接解析
+    # Already in standard format → parse directly
     if all(x in body for x in ["[1. Detail Test Steps:]", "[2. Expected Result:]", "[3. Actual Result:]"]):
         try:
             content = re.search(r"(\[1\..*?)(?=\[4\.|\Z)", body, re.DOTALL).group(1)
@@ -299,13 +308,13 @@ def extract_description(body: str, email_id: str):
         except Exception as e:
             logger.warning(f"Regex extraction for description failed: {e}")
 
-    # 小文本：直接全文喂给 LLM
+    # Small text → send full body
     if len(body) <= MAX_CONTEXT_CHARS:
         prompt = make_triplet_prompt(body, group="desc")
         out = ask_llm_gateway(prompt, max_tokens=MAX_LLM_TOKENS)
         return {"description": out}
 
-    # 大文本：不持久化、仅内存召回若干片段再一次问三段
+    # Long text → similarity-based context assembly
     context = _build_context_by_similarity(body, group="desc")
     prompt = make_triplet_prompt(context, group="desc")
     out = ask_llm_gateway(prompt, max_tokens=MAX_LLM_TOKENS)
@@ -314,7 +323,7 @@ def extract_description(body: str, email_id: str):
 def extract_resolution(body: str, email_id: str):
     body = clean_text(body)
 
-    # 已是标准三段 → 直接解析
+    # Already in standard format → parse directly
     if all(x in body for x in ["[1. Workaround:]", "[2. Description of the correction:]", "[3. Test requirements:]"]):
         try:
             content = re.search(r"(\[1\..*?)(?=\[4\.|\Z)", body, re.DOTALL).group(1)
@@ -327,13 +336,13 @@ def extract_resolution(body: str, email_id: str):
         except Exception as e:
             logger.warning(f"Regex extraction for resolution failed: {e}")
 
-    # 小文本：直接全文喂给 LLM
+    # Small text → send full body
     if len(body) <= MAX_CONTEXT_CHARS:
         prompt = make_triplet_prompt(body, group="reso")
         out = ask_llm_gateway(prompt, max_tokens=MAX_LLM_TOKENS)
         return {"resolution": out}
 
-    # 大文本：不持久化、仅内存召回若干片段再一次问三段
+    # Long text → similarity-based context assembly
     context = _build_context_by_similarity(body, group="reso")
     prompt = make_triplet_prompt(context, group="reso")
     out = ask_llm_gateway(prompt, max_tokens=MAX_LLM_TOKENS)
