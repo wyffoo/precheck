@@ -11,7 +11,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ========= Your existing extraction module =========
+# ========= extraction module =========
 from ai_extract import parse_eml, parse_msg, extract_description, extract_resolution, extract_image_text
 
 # ========= NLTK Dependencies =========
@@ -44,8 +44,8 @@ SUPPORTED_EXTENSIONS = {
 }
 
 # ========= PRONTO sync config (hardcoded) =========
-PRONTO_USER = "wyifan"
-PRONTO_PASS = "Wyywjh1018"
+PRONTO_USER = "hhonore"
+PRONTO_PASS = "kR62BFcD_01"
 PRONTO_BASE = "https://pronto.ext.net.nokia.com/prontoapi/rest/api/latest"
 PAGE_SIZE = 50
 FA_WORKERS = 5
@@ -385,7 +385,7 @@ def pronto_sync():
     Body (optional): { "limit": 100, "autoCategorizeNonCNN": false }
     """
     payload = request.get_json(silent=True) or {}
-    limit = int(payload.get("limit") or 100)
+    limit = int(payload.get("limit") or 100)  #fetch latest 100 pr from pronto
     auto_categorize_non_cnn = bool(payload.get("autoCategorizeNonCNN") or False)
 
     try:
